@@ -92,7 +92,7 @@ This will ensure that when webpack encounters js and jsx files, they will be pre
 
 
 ##Handle Images
-1. Import the provided image by adding `import clockImage from "./asset/clock.jpg" ` to the top of the file.
+1. Import the provided image by adding `import clockImage from "./assets/clock.jpg" ` to the top of the file.
 2. Add the `clock.jpg` image to the component by changing the `element` to 
 ```jsx
 const element = (
