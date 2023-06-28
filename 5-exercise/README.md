@@ -112,7 +112,7 @@ Check the error you get in the browser.
 }
 ```
 
-This will emit the image to the `.dist` folder with a random name, and inject it's path into the `clockImage` variable.
+This will emit the image to the `.dist` folder with a randomly generated name, and inject the path of this file into the `clockImage` variable of the bundle. Note that you won't see this in the dist folder when using the dev server, as it works in memory.
 
 4. Re-run `npm start` to pick up the new config. 
 
@@ -138,6 +138,9 @@ We can configure webpack to include mapping to our original code by adding the `
 3. In `webpack.config.js`, add the line `devtool: "source-map"` on the root level of the config. 
 
 4. Re-run `npm start` to pick up the new config and try debugging in the browser again. 
+
+
+5. Remove the debugger statement before continuing to the next task.
 
 
 ## Task 5: Linting
@@ -247,22 +250,23 @@ npm install -D html-webpack-plugin
 Note that no script tag is included here. The plugin takes care of that for us.
 
 
-3. Update both webpack config files to include the HTMLWebpackPlugin. Add the following:
+3. Update both webpack config files to include the HTMLWebpackPlugin. Add the following line to the top of the file:
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-module.exports = {
-  // ...
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })
-  ]
-};
 ```
-4. Delete the `dist` folder and run `npm run build`. Ensure that an index.html file is output and ensure that our production configuration works by opening `index.html` in the browser.
 
-5. Delete the `dist` folder and run `npm start`. Webpack serve will not output a dist directory this time, but the config is correct if the app runs.
+4. Add the following plugin to the root of the exported object.
+```javascript
+plugins: [
+  new HtmlWebpackPlugin({
+    template: './src/index.html'
+  })
+]
+```
+
+5. Delete the `dist` folder and run `npm run build`. Ensure that an index.html file is output and ensure that our production configuration works by opening `index.html` in the browser.
+
+6. Delete the `dist` folder and run `npm start`. Webpack dev server will not output a dist directory this time (it's in memory), but the config is correct if the app runs.
 
 **Note**: When working with webpack, it is common to encounter repetitive configuration code and the potential for inconsistencies between development and production environments. To address this, a recommended approach is to utilize three separate configuration files.
 
